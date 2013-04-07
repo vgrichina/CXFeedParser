@@ -1,3 +1,0 @@
-[submodule "libtidy"]
-	path = libtidy
-	url = git://github.com/w3c/tidy-html5.git
