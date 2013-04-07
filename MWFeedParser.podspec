@@ -26,6 +26,7 @@ Pod::Spec.new do |s|
     ss.source_files =  'Classes/MWFeedInfo.{h,m}', 'Classes/MWFeedItem.{h,m}', 'Classes/MWFeedParser.{h,m}', 'Classes/MWImageParser.{h,m}', 'Classes/MWFeedParser_Private.h'
     dependency = 'NSString+XMLEntities'
     dependency = 'NSDate+InternetDateTime'
-    dependency = 'CTidy', '~> 0.3.1'
+
+    ss.dependency 'CTidy', '~> 0.3.1'
   end
 end
