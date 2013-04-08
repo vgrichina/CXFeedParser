@@ -42,30 +42,30 @@
     TidyBuffer output = {0};
     TidyBuffer errbuf = {0};
 
-    TidyDoc tdoc = tidyCreate();
+    TidyDoc tdoc = ig_tidyCreate();
 
     // Stup Tidy to convert into XML
-    if (!tidyOptSetBool(tdoc, TidyXmlOut, yes)) {
+    if (!ig_tidyOptSetBool(tdoc, TidyXmlOut, yes)) {
         return nil;
     }
     // Setup Tidy to use UTF-8
-    if (!tidyOptSetValue(tdoc, TidyCharEncoding, "utf8")) {
+    if (!ig_tidyOptSetValue(tdoc, TidyCharEncoding, "utf8")) {
         return nil;
     }
     // Capture diagnostics
-    if (tidySetErrorBuffer(tdoc, &errbuf) < 0) {
+    if (ig_tidySetErrorBuffer(tdoc, &errbuf) < 0) {
         return nil;
     }
     // Parse the input
-    if (tidyParseString(tdoc, [html UTF8String]) < 0) {
+    if (ig_tidyParseString(tdoc, [html UTF8String]) < 0) {
         return nil;
     }
     // Tidy it up!
-    if (tidyCleanAndRepair(tdoc) < 0) {
+    if (ig_tidyCleanAndRepair(tdoc) < 0) {
         return nil;
     }
     // Pretty Print
-    if (tidySaveBuffer(tdoc, &output) < 0) {
+    if (ig_tidySaveBuffer(tdoc, &output) < 0) {
         return nil;
     }
 
