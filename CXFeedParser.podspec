@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
-  s.name             =  'MWFeedParser'
+  s.name             =  'CXFeedParser'
   s.version          =  '0.0.1'
   s.license          =  'MIT'
   s.summary          =  'An Objective-C RSS / Atom Feed Parser for iOS.'
   s.homepage         =  'https://github.com/mwaterfall/MWFeedParser'
-  s.author           =  { 'Michael Waterfall' => 'mw@d3i.com' }
-  s.source           =  { :git => 'https://github.com/mwaterfall/MWFeedParser.git', :commit => '0b1d301877c43c80e5fe5c7f294a2a34fa62f5a7' }
+  s.author           =  { 'Michael Waterfall' => 'mw@d3i.com', 'Vladimir Grichina' => 'vgrichina@componentix.com' }
+  s.source           =  { :git => 'https://github.com/vgrichina/CXFeedParser.git', :commit => '5b54521112e65a95d3791ac221d1cd54d93b8d00' }
   s.platform         =  :ios
   s.framework        =  'Foundation'
 
