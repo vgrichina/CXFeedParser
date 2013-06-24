@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.summary          =  'An Objective-C RSS / Atom Feed Parser for iOS.'
   s.homepage         =  'https://github.com/vgrichina/CXFeedParser'
   s.author           =  { 'Michael Waterfall' => 'mw@d3i.com', 'Vladimir Grichina' => 'vgrichina@componentix.com' }
-  s.source           =  { :git => 'https://github.com/vgrichina/CXFeedParser.git', :commit => '5b54521112e65a95d3791ac221d1cd54d93b8d00' }
+  s.source           =  { :git => 'https://github.com/vgrichina/CXFeedParser.git', :tag => '0.1.0'}
   s.platform         =  :ios
   s.framework        =  'Foundation'
 
