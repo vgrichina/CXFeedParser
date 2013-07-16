@@ -35,6 +35,7 @@
 	NSString *title; // Item title
 	NSString *link; // Item URL
 	NSDate *date; // Date the item was published
+    NSDate *finishdate; // Date the item was finished
 	NSDate *updated; // Date the item was updated if available
 	NSString *summary; // Description of item
 	NSString *content; // More detailed content (if available)
@@ -54,6 +55,7 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *link;
 @property (nonatomic, copy) NSDate *date;
+@property (nonatomic, copy) NSDate *finishdate;
 @property (nonatomic, copy) NSDate *updated;
 @property (nonatomic, copy) NSString *summary;
 @property (nonatomic, copy) NSString *content;
