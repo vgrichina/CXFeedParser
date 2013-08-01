@@ -533,7 +533,10 @@
 		}
 		
 		// New item
-		MWFeedItem *newItem = [[MWFeedItem alloc] init];
+        if (!self.feedItemClass) {
+            self.feedItemClass = [MWFeedItem class];
+        }
+		id newItem = [[self.feedItemClass alloc] init];
 		self.item = newItem;
 		[newItem release];
 		
