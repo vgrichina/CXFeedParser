@@ -65,4 +65,7 @@
 - (BOOL)createEnclosureFromAttributes:(NSDictionary *)attributes andAddToItem:(MWFeedItem *)currentItem;
 - (BOOL)processAtomLink:(NSDictionary *)attributes andAddToMWObject:(id)MWObject;
 
+// NOTE: This should be overriden by subclasses to allow custom feed item properties
+- (BOOL)processItemEntityWithCurrentPath:(NSString *)currentPath andProcessedText:(NSString *)processedText;
+
 @end

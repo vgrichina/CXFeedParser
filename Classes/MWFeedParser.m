@@ -592,9 +592,6 @@
     if ([currentPath isEqualToString:@"/rss/channel/item/pubDate"])
     { if (processedText.length > 0)
         item.date = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC822]; return YES; }
-    if ([currentPath isEqualToString:@"/rss/channel/item/finishDate"])
-    { if (processedText.length > 0)
-        item.finishdate = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC822]; return YES; }
     if ([currentPath isEqualToString:@"/rss/channel/item/enclosure"])
     { [self createEnclosureFromAttributes:currentElementAttributes andAddToItem:item]; return YES; }
     if ([currentPath isEqualToString:@"/rss/channel/item/dc:date"])
