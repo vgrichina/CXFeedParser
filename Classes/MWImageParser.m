@@ -69,7 +69,7 @@
         return nil;
     }
 
-    html = [NSString stringWithUTF8String:(char *)output.bp];
+    html = output.bp ? [NSString stringWithUTF8String:(char *)output.bp] : nil;
 
     MWImageParser *parser = [[MWImageParser new] autorelease];
     parser.images = [NSMutableArray array];
