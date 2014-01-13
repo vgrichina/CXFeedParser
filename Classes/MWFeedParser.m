@@ -3,21 +3,21 @@
 //  MWFeedParser
 //
 //  Copyright (c) 2010 Michael Waterfall
-//  
+//
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  1. The above copyright notice and this permission notice shall be included
 //     in all copies or substantial portions of the Software.
-//  
+//
 //  2. This Software cannot be used to archive or collect data such as (but not
-//     limited to) that of events, news, experiences and activities, for the 
+//     limited to) that of events, news, experiences and activities, for the
 //     purpose of any concept relating to diary/journal keeping.
-//  
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -42,9 +42,9 @@
 
 // Empty XHTML elements ( <!ELEMENT br EMPTY> in http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd )
 #define ELEMENT_IS_EMPTY(e) ([e isEqualToString:@"br"] || [e isEqualToString:@"img"] || [e isEqualToString:@"input"] || \
-							 [e isEqualToString:@"hr"] || [e isEqualToString:@"link"] || [e isEqualToString:@"base"] || \
-							 [e isEqualToString:@"basefont"] || [e isEqualToString:@"frame"] || [e isEqualToString:@"meta"] || \
-							 [e isEqualToString:@"area"] || [e isEqualToString:@"col"] || [e isEqualToString:@"param"])
+[e isEqualToString:@"hr"] || [e isEqualToString:@"link"] || [e isEqualToString:@"base"] || \
+[e isEqualToString:@"basefont"] || [e isEqualToString:@"frame"] || [e isEqualToString:@"meta"] || \
+[e isEqualToString:@"area"] || [e isEqualToString:@"col"] || [e isEqualToString:@"param"])
 
 // Implementation
 @implementation MWFeedParser
@@ -61,7 +61,7 @@
 
 - (id)init {
 	if ((self = [super init])) {
-
+        
 		// Defaults
 		feedParseType = ParseTypeFull;
 		connectionType = ConnectionTypeSynchronously;
@@ -135,14 +135,14 @@
 
 // Parse using URL for backwards compatibility
 - (BOOL)parse {
-
+    
 	// Reset
 	[self reset];
 	
 	// Perform checks before parsing
-	if (!url || !delegate) { [self parsingFailedWithErrorCode:MWErrorCodeNotInitiated 
+	if (!url || !delegate) { [self parsingFailedWithErrorCode:MWErrorCodeNotInitiated
 											   andDescription:@"Delegate or URL not specified"]; return NO; }
-	if (parsing) { [self parsingFailedWithErrorCode:MWErrorCodeGeneral 
+	if (parsing) { [self parsingFailedWithErrorCode:MWErrorCodeGeneral
 									 andDescription:@"Cannot start parsing as parsing is already in progress"]; return NO; }
 	
 	// Reset state for next parse
@@ -157,8 +157,8 @@
 	
 	// Request
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url
-												  cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData 
-											  timeoutInterval:60];
+                                                                cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                            timeoutInterval:60];
 	[request setValue:@"MWFeedParser" forHTTPHeaderField:@"User-Agent"];
 	
 	// Debug Log
@@ -172,13 +172,13 @@
 		if (urlConnection) {
 			asyncData = [[NSMutableData alloc] init];// Create data
 		} else {
-			[self parsingFailedWithErrorCode:MWErrorCodeConnectionFailed 
+			[self parsingFailedWithErrorCode:MWErrorCodeConnectionFailed
 							  andDescription:[NSString stringWithFormat:@"Asynchronous connection failed to URL: %@", url]];
 			success = NO;
 		}
 		
 	} else {
-	
+        
 		// Sync
 		NSURLResponse *response = nil;
 		NSError *error = nil;
@@ -186,7 +186,7 @@
 		if (data && !error) {
 			[self startParsingData:data textEncodingName:[response textEncodingName]]; // Process
 		} else {
-			[self parsingFailedWithErrorCode:MWErrorCodeConnectionFailed 
+			[self parsingFailedWithErrorCode:MWErrorCodeConnectionFailed
 							  andDescription:[NSString stringWithFormat:@"Synchronous connection failed to URL: %@", url]];
 			success = NO;
 		}
@@ -244,7 +244,7 @@
 					NSRange a = [string rangeOfString:@"?>"];
 					if (a.location != NSNotFound) {
 						NSString *xmlDec = [string substringToIndex:a.location];
-						if ([xmlDec rangeOfString:@"encoding=\"UTF-8\"" 
+						if ([xmlDec rangeOfString:@"encoding=\"UTF-8\""
 										  options:NSCaseInsensitiveSearch].location == NSNotFound) {
 							NSRange b = [xmlDec rangeOfString:@"encoding=\""];
 							if (b.location != NSNotFound) {
@@ -276,7 +276,7 @@
 			NSXMLParser *newFeedParser = [[NSXMLParser alloc] initWithData:data];
 			self.feedParser = newFeedParser;
 			[newFeedParser release];
-			if (feedParser) { 
+			if (feedParser) {
 				
 				// Parse!
 				feedParser.delegate = self;
@@ -290,7 +290,7 @@
 		} else {
 			[self parsingFailedWithErrorCode:MWErrorCodeFeedParsingError andDescription:@"Error with feed encoding"];
 		}
-
+        
 	}
 }
 
@@ -363,8 +363,8 @@
 		parsingComplete = YES;
 		
 		// Create error
-		NSError *error = [NSError errorWithDomain:MWErrorDomain 
-											 code:code 
+		NSError *error = [NSError errorWithDomain:MWErrorDomain
+											 code:code
 										 userInfo:[NSDictionary dictionaryWithObject:description
 																			  forKey:NSLocalizedDescriptionKey]];
 		MWLog(@"%@", error);
@@ -422,7 +422,7 @@
     self.urlConnection = nil;
     self.asyncData = nil;
 	self.asyncTextEncodingName = nil;
-
+    
 }
 
 -(NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse {
@@ -432,8 +432,8 @@
 #pragma mark -
 #pragma mark XML Parsing
 
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI 
-									   qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict {
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI
+ qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict {
 	MWXMLLog(@"NSXMLParser: didStartElement: %@", qualifiedName);
 	
 	// Pool
@@ -452,8 +452,8 @@
 		
 		// Add attributes
 		for (NSString *key in attributeDict) {
-			[currentText appendFormat:@" %@=\"%@\"", key, 
-				[[attributeDict objectForKey:key] stringByEncodingHTMLEntities]];
+			[currentText appendFormat:@" %@=\"%@\"", key,
+             [[attributeDict objectForKey:key] stringByEncodingHTMLEntities]];
 		}
 		
 		// End tag or close
@@ -474,13 +474,13 @@
 	
 	// Determine feed type
 	if (feedType == FeedTypeUnknown) {
-		if ([qualifiedName isEqualToString:@"rss"]) feedType = FeedTypeRSS; 
+		if ([qualifiedName isEqualToString:@"rss"]) feedType = FeedTypeRSS;
 		else if ([qualifiedName isEqualToString:@"rdf:RDF"]) feedType = FeedTypeRSS1;
 		else if ([qualifiedName isEqualToString:@"feed"]) feedType = FeedTypeAtom;
 		else {
-		
+            
 			// Invalid format so fail
-			[self parsingFailedWithErrorCode:MWErrorCodeFeedParsingError 
+			[self parsingFailedWithErrorCode:MWErrorCodeFeedParsingError
 							  andDescription:@"XML document is not a valid web feed document."];
 			
 		}
@@ -497,12 +497,12 @@
 			return;
 		}
 	}
-			
+    
 	// Entering new item element
 	if ((feedType == FeedTypeRSS  && [currentPath isEqualToString:@"/rss/channel/item"]) ||
 		(feedType == FeedTypeRSS1 && [currentPath isEqualToString:@"/rdf:RDF/item"]) ||
 		(feedType == FeedTypeAtom && [currentPath isEqualToString:@"/feed/entry"])) {
-
+        
 		// Send off feed info to delegate
 		if (!hasEncounteredItems) {
 			hasEncounteredItems = YES;
@@ -510,7 +510,7 @@
 				
 				// Dispatch feed info to delegate
 				[self dispatchFeedInfoToDelegate];
-
+                
 				// Stop parsing if only requiring meta data
 				if (feedParseType == ParseTypeInfoOnly) {
 					
@@ -592,6 +592,11 @@
     if ([currentPath isEqualToString:@"/rss/channel/item/pubDate"])
     { if (processedText.length > 0)
         item.date = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC822]; return YES; }
+    
+    if ([currentPath isEqualToString:@"/rss/channel/item/dc:creator"])
+    { if (processedText.length > 0)
+        item.creator = processedText; return YES; }
+    
     if ([currentPath isEqualToString:@"/rss/channel/item/enclosure"])
     { [self createEnclosureFromAttributes:currentElementAttributes andAddToItem:item]; return YES; }
     if ([currentPath isEqualToString:@"/rss/channel/item/dc:date"])
@@ -613,8 +618,8 @@
     return NO;
 }
 
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName 
-									  namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName
+  namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
 	MWXMLLog(@"NSXMLParser: didEndElement: %@", qName);
 	
 	// Pool
@@ -626,7 +631,7 @@
 		
 		// Check for finishing parsing structure as content
 		if (currentPath.length > pathOfElementWithXHTMLType.length) {
-
+            
 			// Close XHTML tag unless it is an empty element
 			if (!ELEMENT_IS_EMPTY(elementName)) [currentText appendFormat:@"</%@>", elementName];
 			
@@ -638,7 +643,7 @@
 			return;
 			
 		}
-
+        
 		// Finish
 		parseStructureAsContent = NO;
 		self.pathOfElementWithXHTMLType = nil;
@@ -653,7 +658,7 @@
 		
 		// Remove newlines and whitespace from currentText
 		NSString *processedText = [currentText stringByRemovingNewLinesAndWhitespace];
-
+        
 		// Process
 		switch (feedType) {
 			case FeedTypeRSS: {
@@ -689,6 +694,10 @@
 				// Item
 				if (!processed) {
 					if ([currentPath isEqualToString:@"/feed/entry/title"]) { if (processedText.length > 0) item.title = processedText; processed = YES; }
+                    //----------------
+                    //                    if ([currentPath isEqualToString:@"/feed/entry/dc:creator"]) { if (processedText.length > 0) item.creator = processedText; processed = YES; }
+                    //----------------
+                    
 					else if ([currentPath isEqualToString:@"/feed/entry/link"]) { [self processAtomLink:currentElementAttributes andAddToMWObject:item]; processed = YES; }
 					else if ([currentPath isEqualToString:@"/feed/entry/id"]) { if (processedText.length > 0) item.identifier = processedText; processed = YES; }
 					else if ([currentPath isEqualToString:@"/feed/entry/summary"]) { if (processedText.length > 0) item.summary = processedText; processed = YES; }
@@ -717,10 +726,10 @@
 	if (!processed) {
 		if (((feedType == FeedTypeRSS || feedType == FeedTypeRSS1) && [qName isEqualToString:@"item"]) ||
 			(feedType == FeedTypeAtom && [qName isEqualToString:@"entry"])) {
-
+            
             // Try to extract images from <img> tags in item content / summary
             item.images = [MWImageParser parseImagesFromXHTMLString:item.content ? item.content : item.summary];
-
+            
 			// Dispatch item to delegate
 			[self dispatchFeedItemToDelegate];
 			
@@ -736,7 +745,7 @@
 			// Document ending so if we havent sent off feed info yet, do so
 			if (info && feedParseType != ParseTypeItemsOnly) [self dispatchFeedInfoToDelegate];
 			
-		}	
+		}
 	}
 	
 	// Drain pool
@@ -744,7 +753,7 @@
 	
 }
 
-//- (void)parser:(NSXMLParser *)parser foundAttributeDeclarationWithName:(NSString *)attributeName 
+//- (void)parser:(NSXMLParser *)parser foundAttributeDeclarationWithName:(NSString *)attributeName
 //			forElement:(NSString *)elementName type:(NSString *)type defaultValue:(NSString *)defaultValue {
 //	MWXMLLog(@"NSXMLParser: foundAttributeDeclarationWithName: %@", attributeName);
 //}
@@ -763,7 +772,7 @@
 		// Add - No need to encode as CDATA should not be encoded as it's ignored by the parser
 		if (string) [currentText appendString:string];
 		
-	} @catch (NSException * e) { 
+	} @catch (NSException * e) {
 	} @finally {
 		[string release];
 	}
@@ -802,7 +811,7 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
 	MWXMLLog(@"NSXMLParser: parserDidEndDocument");
-
+    
 	// Debug Log
 	MWLog(@"MWFeedParser: Parsing finished");
 	
@@ -836,7 +845,7 @@
 
 - (void)dispatchFeedInfoToDelegate {
 	if (info) {
-	
+        
 		// Inform delegate
 		if ([delegate respondsToSelector:@selector(feedParser:didParseFeedInfo:)])
 			[delegate feedParser:self didParseFeedInfo:[[info retain] autorelease]];
@@ -852,11 +861,11 @@
 
 - (void)dispatchFeedItemToDelegate {
 	if (item) {
-
+        
 		// Process before hand
 		if (!item.summary) { item.summary = item.content; item.content = nil; }
 		if (!item.date && item.updated) { item.date = item.updated; }
-
+        
 		// Debug log
 		MWLog(@"MWFeedParser: Feed item \"%@\" successfully parsed", item.title);
 		
@@ -889,8 +898,8 @@
 			
 			// Remove feed URL scheme
 			newURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",
-										  ([value.resourceSpecifier hasPrefix:@"//"] ? @"http:" : @""),
-										  value.resourceSpecifier]];
+                                           ([value.resourceSpecifier hasPrefix:@"//"] ? @"http:" : @""),
+                                           value.resourceSpecifier]];
 			
 		} else {
 			
@@ -939,7 +948,7 @@
 					encType = [attributes objectForKey:@"type"];
 					encLength = [NSNumber numberWithLongLong:[((NSString *)[attributes objectForKey:@"length"]) longLongValue]];
 				}
-				break; 
+				break;
 			}
 			default: break;
 		}
@@ -952,8 +961,8 @@
 		enclosure = [NSDictionary dictionaryWithDictionary:e];
 		[e release];
 	}
-					 
-	// Add to item		 
+    
+	// Add to item
 	if (enclosure) {
 		if (currentItem.enclosures) {
 			currentItem.enclosures = [currentItem.enclosures arrayByAddingObject:enclosure];
