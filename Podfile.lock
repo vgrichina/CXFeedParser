@@ -1,0 +1,10 @@
+PODS:
+  - CTidy (0.3.1)
+
+DEPENDENCIES:
+  - CTidy (~> 0.3.1)
+
+SPEC CHECKSUMS:
+  CTidy: a8ebe9201cdb4269fa8e7ed7f32d34856db62630
+
+COCOAPODS: 0.29.0

@@ -69,6 +69,32 @@
     }
 }
 
+- (void)testDatesAtUrl:(NSURL *)url {
+    DummyDelegate *delegate = [[DummyDelegate new] autorelease];
+    MWFeedParser *feedParser = [[[MWFeedParser alloc] initWithFeedURL:url] autorelease];
+    feedParser.delegate = delegate;
+    feedParser.connectionType = ConnectionTypeSynchronously;
+    [feedParser parse];
+    
+    STAssertTrue([delegate.items count] > 0, @"Should parse items");
+    for (MWFeedItem *item in delegate.items) {
+        STAssertTrue(!!item.date, @"Item should have date: %@", item.link);
+    }
+}
+
+- (void)testCreatorsAtUrl:(NSURL *)url {
+    DummyDelegate *delegate = [[DummyDelegate new] autorelease];
+    MWFeedParser *feedParser = [[[MWFeedParser alloc] initWithFeedURL:url] autorelease];
+    feedParser.delegate = delegate;
+    feedParser.connectionType = ConnectionTypeSynchronously;
+    [feedParser parse];
+    
+    STAssertTrue([delegate.items count] > 0, @"Should parse items");
+    for (MWFeedItem *item in delegate.items) {
+        STAssertTrue(!!item.creator, @"Item should have creator: %@", item.link);
+    }
+}
+
 /*
 - (void)testAdmeImages {
     [self testImagesAtUrl:
@@ -80,6 +106,24 @@
 
 - (void)testPhotobucketImages {
     [self testImagesAtUrl:
+     [NSURL fileURLWithPath:
+      [[NSBundle bundleForClass:[self class]] pathForResource:@"photobucket-rss"
+                                                       ofType:@"xml"
+                                                  inDirectory:@"samples"]]];
+}
+
+- (void)testFeedDates
+{
+    [self testDatesAtUrl:
+     [NSURL fileURLWithPath:
+      [[NSBundle bundleForClass:[self class]] pathForResource:@"rss_Men"
+                                                       ofType:@"xml"
+                                                  inDirectory:@"samples"]]];
+}
+
+- (void)testFeedCreators
+{
+    [self testCreatorsAtUrl:
      [NSURL fileURLWithPath:
       [[NSBundle bundleForClass:[self class]] pathForResource:@"photobucket-rss"
                                                        ofType:@"xml"
