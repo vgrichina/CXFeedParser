@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D3623260D0F684500981E51 /* MWFeedParserAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MWFeedParserAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -19,12 +18,10 @@
 		4C65F318120863F800606CFC /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C65F317120863F800606CFC /* NSString+HTML.m */; };
 		4C661F44125E3F2D007F1792 /* NSDate+InternetDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C661F43125E3F2D007F1792 /* NSDate+InternetDateTime.m */; };
 		4C661F8B125E50FA007F1792 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C661F8A125E50FA007F1792 /* Icon.png */; };
-		4CAD0E1211DA03BD0086F5F8 /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD0E1111DA03BD0086F5F8 /* DetailTableViewController.m */; };
 		4CC89609119F0CED00ED61B6 /* MWFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC89604119F0CED00ED61B6 /* MWFeedParser.m */; };
 		4CC8960A119F0CED00ED61B6 /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC89606119F0CED00ED61B6 /* MWFeedInfo.m */; };
 		4CC8960B119F0CED00ED61B6 /* MWFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC89608119F0CED00ED61B6 /* MWFeedItem.m */; };
 		4CC8960F119F0CFB00ED61B6 /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC8960E119F0CFB00ED61B6 /* NSString+XMLEntities.m */; };
-		4CC89612119F0D0C00ED61B6 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC89611119F0D0C00ED61B6 /* RootViewController.m */; };
 		D545364017124C9400411558 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D545363F17124C9400411558 /* libPods.a */; };
 		D5854E1214E1C59C00DEAE67 /* MWImageParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D5854E1114E1C59C00DEAE67 /* MWImageParser.m */; };
 		D5854E1A14E1CC9400DEAE67 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5854E1914E1CC9300DEAE67 /* SenTestingKit.framework */; };
@@ -39,13 +36,14 @@
 		D5854E3514E1CD5500DEAE67 /* MWImageParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D5854E1114E1C59C00DEAE67 /* MWImageParser.m */; };
 		D5854E3714E1CD5500DEAE67 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C65F317120863F800606CFC /* NSString+HTML.m */; };
 		D5854E3914E1CD5500DEAE67 /* NSDate+InternetDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C661F43125E3F2D007F1792 /* NSDate+InternetDateTime.m */; };
+		D5D09AEB1905A54A0042564A /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D09AE61905A54A0042564A /* DetailTableViewController.m */; };
+		D5D09AEC1905A54A0042564A /* MWFeedParserAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D09AE81905A54A0042564A /* MWFeedParserAppDelegate.m */; };
+		D5D09AED1905A54A0042564A /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D09AEA1905A54A0042564A /* RootViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		18DC2AC01886AEB6008A7FEB /* crt1.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = crt1.o; path = usr/lib/crt1.o; sourceTree = SDKROOT; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D3623240D0F684500981E51 /* MWFeedParserAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParserAppDelegate.h; sourceTree = "<group>"; };
-		1D3623250D0F684500981E51 /* MWFeedParserAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedParserAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* MWFeedParser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MWFeedParser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -62,8 +60,6 @@
 		4C661F43125E3F2D007F1792 /* NSDate+InternetDateTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+InternetDateTime.m"; sourceTree = "<group>"; usesTabs = 0; };
 		4C661F8A125E50FA007F1792 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		4CAA79C911A406890009078E /* MWFeedParser_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParser_Private.h; sourceTree = "<group>"; };
-		4CAD0E1011DA03BD0086F5F8 /* DetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewController.h; sourceTree = "<group>"; };
-		4CAD0E1111DA03BD0086F5F8 /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewController.m; sourceTree = "<group>"; };
 		4CC89603119F0CED00ED61B6 /* MWFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParser.h; sourceTree = "<group>"; };
 		4CC89604119F0CED00ED61B6 /* MWFeedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedParser.m; sourceTree = "<group>"; };
 		4CC89605119F0CED00ED61B6 /* MWFeedInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedInfo.h; sourceTree = "<group>"; };
@@ -72,8 +68,6 @@
 		4CC89608119F0CED00ED61B6 /* MWFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedItem.m; sourceTree = "<group>"; };
 		4CC8960D119F0CFB00ED61B6 /* NSString+XMLEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XMLEntities.h"; sourceTree = "<group>"; };
 		4CC8960E119F0CFB00ED61B6 /* NSString+XMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLEntities.m"; sourceTree = "<group>"; };
-		4CC89610119F0D0C00ED61B6 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		4CC89611119F0D0C00ED61B6 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		5542BA37CA56497CAD251249 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1107310486CEB800E47090 /* MWFeedParser-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MWFeedParser-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D545363F17124C9400411558 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Release-iphoneos/libPods.a"; sourceTree = "<group>"; };
@@ -87,6 +81,12 @@
 		D5854E2414E1CC9400DEAE67 /* MWFeedParserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MWFeedParserTests.m; sourceTree = "<group>"; };
 		D5854E2614E1CC9400DEAE67 /* MWFeedParserTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MWFeedParserTests-Prefix.pch"; sourceTree = "<group>"; };
 		D5854E2A14E1CD1700DEAE67 /* samples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = samples; sourceTree = "<group>"; };
+		D5D09AE51905A54A0042564A /* DetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewController.h; sourceTree = "<group>"; };
+		D5D09AE61905A54A0042564A /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewController.m; sourceTree = "<group>"; };
+		D5D09AE71905A54A0042564A /* MWFeedParserAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParserAppDelegate.h; sourceTree = "<group>"; };
+		D5D09AE81905A54A0042564A /* MWFeedParserAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedParserAppDelegate.m; sourceTree = "<group>"; };
+		D5D09AE91905A54A0042564A /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		D5D09AEA1905A54A0042564A /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,12 +232,12 @@
 		4CC89620119F0D1E00ED61B6 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				1D3623240D0F684500981E51 /* MWFeedParserAppDelegate.h */,
-				1D3623250D0F684500981E51 /* MWFeedParserAppDelegate.m */,
-				4CC89610119F0D0C00ED61B6 /* RootViewController.h */,
-				4CC89611119F0D0C00ED61B6 /* RootViewController.m */,
-				4CAD0E1011DA03BD0086F5F8 /* DetailTableViewController.h */,
-				4CAD0E1111DA03BD0086F5F8 /* DetailTableViewController.m */,
+				D5D09AE51905A54A0042564A /* DetailTableViewController.h */,
+				D5D09AE61905A54A0042564A /* DetailTableViewController.m */,
+				D5D09AE71905A54A0042564A /* MWFeedParserAppDelegate.h */,
+				D5D09AE81905A54A0042564A /* MWFeedParserAppDelegate.m */,
+				D5D09AE91905A54A0042564A /* RootViewController.h */,
+				D5D09AEA1905A54A0042564A /* RootViewController.m */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -389,16 +389,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5D09AEB1905A54A0042564A /* DetailTableViewController.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				1D3623260D0F684500981E51 /* MWFeedParserAppDelegate.m in Sources */,
+				D5D09AED1905A54A0042564A /* RootViewController.m in Sources */,
 				4CC89609119F0CED00ED61B6 /* MWFeedParser.m in Sources */,
 				4CC8960A119F0CED00ED61B6 /* MWFeedInfo.m in Sources */,
 				4CC8960B119F0CED00ED61B6 /* MWFeedItem.m in Sources */,
 				4CC8960F119F0CFB00ED61B6 /* NSString+XMLEntities.m in Sources */,
-				4CC89612119F0D0C00ED61B6 /* RootViewController.m in Sources */,
-				4CAD0E1211DA03BD0086F5F8 /* DetailTableViewController.m in Sources */,
 				4C65F2EB12085ACE00606CFC /* GTMNSString+HTML.m in Sources */,
 				4C65F318120863F800606CFC /* NSString+HTML.m in Sources */,
+				D5D09AEC1905A54A0042564A /* MWFeedParserAppDelegate.m in Sources */,
 				4C661F44125E3F2D007F1792 /* NSDate+InternetDateTime.m in Sources */,
 				D5854E1214E1C59C00DEAE67 /* MWImageParser.m in Sources */,
 			);
