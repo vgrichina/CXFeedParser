@@ -66,6 +66,6 @@
 - (BOOL)processAtomLink:(NSDictionary *)attributes andAddToMWObject:(id)MWObject;
 
 // NOTE: This should be overriden by subclasses to allow custom feed item properties
-- (BOOL)processItemEntityWithCurrentPath:(NSString *)currentPath andProcessedText:(NSString *)processedText;
+- (BOOL)processItemEntityWithFeedType:(FeedType)type currentPath:(NSString *)path andProcessedText:(NSString *)processedText;
 
 @end
