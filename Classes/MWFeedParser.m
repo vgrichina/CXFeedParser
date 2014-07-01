@@ -204,7 +204,11 @@
 	if (data && !feedParser) {
 		
 		// Create feed info
-		MWFeedInfo *i = [[MWFeedInfo alloc] init];
+        if (!self.feedInfoClass) {
+            self.feedInfoClass = [MWFeedInfo class];
+        }
+        
+		id i = [[self.feedInfoClass alloc] init];
 		self.info = i;
 		[i release];
 		
