@@ -729,7 +729,7 @@
 			(feedType == FeedTypeAtom && [qName isEqualToString:@"entry"])) {
             
             // Try to extract images from <img> tags in item content / summary
-            item.images = [MWImageParser parseImagesFromXHTMLString:item.content ? item.content : item.summary];
+//            item.images = [MWImageParser parseImagesFromXHTMLString:item.content ? item.content : item.summary];
             
 			// Dispatch item to delegate
 			[self dispatchFeedItemToDelegate];
