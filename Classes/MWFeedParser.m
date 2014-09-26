@@ -204,7 +204,11 @@
 	if (data && !feedParser) {
 		
 		// Create feed info
-		MWFeedInfo *i = [[MWFeedInfo alloc] init];
+        if (!self.feedInfoClass) {
+            self.feedInfoClass = [MWFeedInfo class];
+        }
+        
+		id i = [[self.feedInfoClass alloc] init];
 		self.info = i;
 		[i release];
 		
@@ -571,50 +575,101 @@
 	
 }
 
-- (BOOL)processItemEntityWithCurrentPath:(NSString *)currentPath andProcessedText:(NSString *)processedText
+- (BOOL)processItemEntityWithFeedType:(FeedType)type currentPath:(NSString *)path andProcessedText:(NSString *)processedText
 {
-    // Item
-    if ([currentPath isEqualToString:@"/rss/channel/item/title"])
-    { if (processedText.length > 0)
-        item.title = processedText; return YES; }
-    if ([currentPath isEqualToString:@"/rss/channel/item/link"])
-    { if (processedText.length > 0)
-        item.link = processedText; return YES; }
-    if ([currentPath isEqualToString:@"/rss/channel/item/guid"])
-    { if (processedText.length > 0)
-        item.identifier = processedText; return YES; }
-    if ([currentPath isEqualToString:@"/rss/channel/item/description"])
-    { if (processedText.length > 0)
-        item.summary = processedText; return YES; }
-    if ([currentPath isEqualToString:@"/rss/channel/item/content:encoded"])
-    { if (processedText.length > 0)
-        item.content = processedText; return YES; }
-    if ([currentPath isEqualToString:@"/rss/channel/item/pubDate"])
-    { if (processedText.length > 0)
-        item.date = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC822]; return YES; }
-    
-    if ([currentPath isEqualToString:@"/rss/channel/item/dc:creator"])
-    { if (processedText.length > 0)
-        item.creator = processedText; return YES; }
-    
-    if ([currentPath isEqualToString:@"/rss/channel/item/enclosure"])
-    { [self createEnclosureFromAttributes:currentElementAttributes andAddToItem:item]; return YES; }
-    if ([currentPath isEqualToString:@"/rss/channel/item/dc:date"])
-    { if (processedText.length > 0)
-        item.date = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC3339]; return YES; }
-    
-    // Info
-    if (feedParseType != ParseTypeItemsOnly) {
-        if ([currentPath isEqualToString:@"/rss/channel/title"])
-        { if (processedText.length > 0)
-            info.title = processedText; return YES; }
-        if ([currentPath isEqualToString:@"/rss/channel/description"])
-        { if (processedText.length > 0)
-            info.summary = processedText; return YES; }
-        if ([currentPath isEqualToString:@"/rss/channel/link"])
-        { if (processedText.length > 0)
-            info.link = processedText; return YES; }
+    switch (type) {
+        case FeedTypeRSS: {
+            // Item
+            if ([path isEqualToString:@"/rss/channel/item/title"])
+            { if (processedText.length > 0)
+                item.title = processedText; return YES; }
+            if ([path isEqualToString:@"/rss/channel/item/link"])
+            { if (processedText.length > 0)
+                item.link = processedText; return YES; }
+            if ([path isEqualToString:@"/rss/channel/item/guid"])
+            { if (processedText.length > 0)
+                item.identifier = processedText; return YES; }
+            if ([path isEqualToString:@"/rss/channel/item/description"])
+            { if (processedText.length > 0)
+                item.summary = processedText; return YES; }
+            if ([path isEqualToString:@"/rss/channel/item/content:encoded"])
+            { if (processedText.length > 0)
+                item.content = processedText; return YES; }
+            if ([path isEqualToString:@"/rss/channel/item/pubDate"])
+            { if (processedText.length > 0)
+                item.date = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC822]; return YES; }
+            
+            if ([path isEqualToString:@"/rss/channel/item/dc:creator"])
+            { if (processedText.length > 0)
+                item.creator = processedText; return YES; }
+            
+            if ([path isEqualToString:@"/rss/channel/item/enclosure"])
+            { [self createEnclosureFromAttributes:currentElementAttributes andAddToItem:item]; return YES; }
+            if ([path isEqualToString:@"/rss/channel/item/dc:date"])
+            { if (processedText.length > 0)
+                item.date = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC3339]; return YES; }
+            
+            // Info
+            if (feedParseType != ParseTypeItemsOnly) {
+                if ([path isEqualToString:@"/rss/channel/title"])
+                { if (processedText.length > 0)
+                    info.title = processedText; return YES; }
+                if ([path isEqualToString:@"/rss/channel/description"])
+                { if (processedText.length > 0)
+                    info.summary = processedText; return YES; }
+                if ([path isEqualToString:@"/rss/channel/link"])
+                { if (processedText.length > 0)
+                    info.link = processedText; return YES; }
+            }
+            break;
+        }
+        case FeedTypeRSS1: {
+            
+            // Item
+            if ([path isEqualToString:@"/rdf:RDF/item/title"]) { if (processedText.length > 0) item.title = processedText; return YES; }
+            else if ([path isEqualToString:@"/rdf:RDF/item/link"]) { if (processedText.length > 0) item.link = processedText; return YES; }
+            else if ([path isEqualToString:@"/rdf:RDF/item/dc:identifier"]) { if (processedText.length > 0) item.identifier = processedText; return YES; }
+            else if ([path isEqualToString:@"/rdf:RDF/item/description"]) { if (processedText.length > 0) item.summary = processedText; return YES; }
+            else if ([path isEqualToString:@"/rdf:RDF/item/content:encoded"]) { if (processedText.length > 0) item.content = processedText; return YES; }
+            else if ([path isEqualToString:@"/rdf:RDF/item/dc:date"]) { if (processedText.length > 0) item.date = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC3339]; return YES; }
+            else if ([path isEqualToString:@"/rdf:RDF/item/enc:enclosure"]) { [self createEnclosureFromAttributes:currentElementAttributes andAddToItem:item]; return YES; }
+            
+            // Info
+            if (feedParseType != ParseTypeItemsOnly) {
+                if ([path isEqualToString:@"/rdf:RDF/channel/title"]) { if (processedText.length > 0) info.title = processedText; return YES; }
+                else if ([path isEqualToString:@"/rdf:RDF/channel/description"]) { if (processedText.length > 0) info.summary = processedText; return YES; }
+                else if ([path isEqualToString:@"/rdf:RDF/channel/link"]) { if (processedText.length > 0) info.link = processedText; return YES; }
+            }
+            
+            break;
+        }
+        case FeedTypeAtom: {
+            
+            // Item
+            if ([path isEqualToString:@"/feed/entry/title"]) { if (processedText.length > 0) item.title = processedText; return YES; }
+            //----------------
+            //                    if ([currentPath isEqualToString:@"/feed/entry/dc:creator"]) { if (processedText.length > 0) item.creator = processedText; return YES; }
+            //----------------
+            
+            else if ([path isEqualToString:@"/feed/entry/link"]) { [self processAtomLink:currentElementAttributes andAddToMWObject:item]; return YES; }
+            else if ([path isEqualToString:@"/feed/entry/id"]) { if (processedText.length > 0) item.identifier = processedText; return YES; }
+            else if ([path isEqualToString:@"/feed/entry/summary"]) { if (processedText.length > 0) item.summary = processedText; return YES; }
+            else if ([path isEqualToString:@"/feed/entry/content"]) { if (processedText.length > 0) item.content = processedText; return YES; }
+            else if ([path isEqualToString:@"/feed/entry/published"]) { if (processedText.length > 0) item.date = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC3339]; return YES; }
+            else if ([path isEqualToString:@"/feed/entry/updated"]) { if (processedText.length > 0) item.updated = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC3339]; return YES; }
+            
+            // Info
+            if (feedParseType != ParseTypeItemsOnly) {
+                if ([path isEqualToString:@"/feed/title"]) { if (processedText.length > 0) info.title = processedText; return YES; }
+                else if ([path isEqualToString:@"/feed/description"]) { if (processedText.length > 0) info.summary = processedText; return YES; }
+                else if ([path isEqualToString:@"/feed/link"]) { [self processAtomLink:currentElementAttributes andAddToMWObject:info]; return YES;}
+            }
+            
+            break;
+        }
+        default: break;
     }
+    
     return NO;
 }
 
@@ -658,65 +713,11 @@
 		
 		// Remove newlines and whitespace from currentText
 		NSString *processedText = [currentText stringByRemovingNewLinesAndWhitespace];
-        
-		// Process
-		switch (feedType) {
-			case FeedTypeRSS: {
-                if (!processed) {
-                    processed = [self processItemEntityWithCurrentPath:currentPath andProcessedText:processedText];
-                }
-				break;
-			}
-			case FeedTypeRSS1: {
-				
-				// Item
-				if (!processed) {
-					if ([currentPath isEqualToString:@"/rdf:RDF/item/title"]) { if (processedText.length > 0) item.title = processedText; processed = YES; }
-					else if ([currentPath isEqualToString:@"/rdf:RDF/item/link"]) { if (processedText.length > 0) item.link = processedText; processed = YES; }
-					else if ([currentPath isEqualToString:@"/rdf:RDF/item/dc:identifier"]) { if (processedText.length > 0) item.identifier = processedText; processed = YES; }
-					else if ([currentPath isEqualToString:@"/rdf:RDF/item/description"]) { if (processedText.length > 0) item.summary = processedText; processed = YES; }
-					else if ([currentPath isEqualToString:@"/rdf:RDF/item/content:encoded"]) { if (processedText.length > 0) item.content = processedText; processed = YES; }
-					else if ([currentPath isEqualToString:@"/rdf:RDF/item/dc:date"]) { if (processedText.length > 0) item.date = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC3339]; processed = YES; }
-					else if ([currentPath isEqualToString:@"/rdf:RDF/item/enc:enclosure"]) { [self createEnclosureFromAttributes:currentElementAttributes andAddToItem:item]; processed = YES; }
-				}
-				
-				// Info
-				if (!processed && feedParseType != ParseTypeItemsOnly) {
-					if ([currentPath isEqualToString:@"/rdf:RDF/channel/title"]) { if (processedText.length > 0) info.title = processedText; processed = YES; }
-					else if ([currentPath isEqualToString:@"/rdf:RDF/channel/description"]) { if (processedText.length > 0) info.summary = processedText; processed = YES; }
-					else if ([currentPath isEqualToString:@"/rdf:RDF/channel/link"]) { if (processedText.length > 0) info.link = processedText; processed = YES; }
-				}
-				
-				break;
-			}
-			case FeedTypeAtom: {
-				
-				// Item
-				if (!processed) {
-					if ([currentPath isEqualToString:@"/feed/entry/title"]) { if (processedText.length > 0) item.title = processedText; processed = YES; }
-                    //----------------
-                    //                    if ([currentPath isEqualToString:@"/feed/entry/dc:creator"]) { if (processedText.length > 0) item.creator = processedText; processed = YES; }
-                    //----------------
-                    
-					else if ([currentPath isEqualToString:@"/feed/entry/link"]) { [self processAtomLink:currentElementAttributes andAddToMWObject:item]; processed = YES; }
-					else if ([currentPath isEqualToString:@"/feed/entry/id"]) { if (processedText.length > 0) item.identifier = processedText; processed = YES; }
-					else if ([currentPath isEqualToString:@"/feed/entry/summary"]) { if (processedText.length > 0) item.summary = processedText; processed = YES; }
-					else if ([currentPath isEqualToString:@"/feed/entry/content"]) { if (processedText.length > 0) item.content = processedText; processed = YES; }
-					else if ([currentPath isEqualToString:@"/feed/entry/published"]) { if (processedText.length > 0) item.date = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC3339]; processed = YES; }
-					else if ([currentPath isEqualToString:@"/feed/entry/updated"]) { if (processedText.length > 0) item.updated = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC3339]; processed = YES; }
-				}
-				
-				// Info
-				if (!processed && feedParseType != ParseTypeItemsOnly) {
-					if ([currentPath isEqualToString:@"/feed/title"]) { if (processedText.length > 0) info.title = processedText; processed = YES; }
-					else if ([currentPath isEqualToString:@"/feed/description"]) { if (processedText.length > 0) info.summary = processedText; processed = YES; }
-					else if ([currentPath isEqualToString:@"/feed/link"]) { [self processAtomLink:currentElementAttributes andAddToMWObject:info]; processed = YES;}
-				}
-				
-				break;
-			}
-			default: break;
-		}
+
+        // Process
+        if(!processed)
+            processed = [self processItemEntityWithFeedType:feedType currentPath:currentPath andProcessedText:processedText];
+
 	}
 	
 	// Adjust path
@@ -728,7 +729,7 @@
 			(feedType == FeedTypeAtom && [qName isEqualToString:@"entry"])) {
             
             // Try to extract images from <img> tags in item content / summary
-            item.images = [MWImageParser parseImagesFromXHTMLString:item.content ? item.content : item.summary];
+//            item.images = [MWImageParser parseImagesFromXHTMLString:item.content ? item.content : item.summary];
             
 			// Dispatch item to delegate
 			[self dispatchFeedItemToDelegate];
